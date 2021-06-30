@@ -28,6 +28,15 @@ import Foundation
 */
 
 // Добавь код сюда:
+
+var implicitInt = 3
+var explicitInt: Int = 7
+
+var temp = implicitInt
+implicitInt = explicitInt
+explicitInt = temp
+
+print("implicitInt now: \(implicitInt)","\nexplicitInt now: \(explicitInt)")
 /*:
 ---
 ### Задание 2:
@@ -36,7 +45,12 @@ import Foundation
 */
 // Добавь код сюда:
 
+let floatNum: Float = 3.71
+let emptyFloatNum: Float
+var emptyDoubleNum: Double
 
+emptyFloatNum = 37.1
+emptyDoubleNum = 3.14
 /*:
 ---
 #### Задание 3:
@@ -46,18 +60,32 @@ import Foundation
 */
 // Добавь код сюда:
 
+let emptyIntConst: Int
+let emptyFloatConst: Float
+let emptyDoubleConst: Double
+
+emptyIntConst = 18
+emptyFloatConst = 16.4
+emptyDoubleConst = 5.7
+
+var sumOfConsts: Float = Float(emptyIntConst) + emptyFloatConst + Float(emptyDoubleConst)
+print("Сумма равна: \(sumOfConsts)")
 /*:
 - Найди произведение всех трех констант и запиши его в переменную типа `Int`. Результат выведи в консоль.
  - Note: 👆 _Помни, что тебе необходимо получить результат с минимальной погрешностью._
 */
 // Добавь код сюда:
 
+var multipliedConsts: Int = Int (Double(emptyIntConst) * Double(emptyFloatConst) * emptyDoubleConst)
+
+print("Результат умножание равен: \(multipliedConsts)")
 /*:
 - Найди остаток от деления константы типа `Float` на константу типа `Double` и запиши ее в переменную типа `Double`. Результат выведи в консоль.
 */
 // Добавь код сюда:
+var remainder: Double = Double(Int(emptyFloatConst) % Int(emptyDoubleConst))
 
-
+print("Остаток от деления: \(remainder)")
 /*:
 ---
 #### Задание 4:
@@ -68,6 +96,12 @@ import Foundation
  */
 // Добавь код сюда:
 
+var someString: String = "Какая то переменная со строкой"
+var someInt: Int = 5, anotherInt: Int = 15
+
+let concatenation = someString + "и значением " + String(someInt + anotherInt)
+
+print(concatenation)
 /*:
 ---
 #### Задание 5:
@@ -78,7 +112,12 @@ import Foundation
  */
 // Добавь код сюда:
 
+var someBool: Bool = true, anotherBool: Bool = false
 
+let logicAnd = someBool && anotherBool
+let logicOr = someBool || anotherBool
+
+print("И: \(logicAnd)", "\nИЛИ:\(logicOr)")
 /*:
 ---
 #### Задание 6:
@@ -89,6 +128,11 @@ import Foundation
  */
 // Добавь код сюда:
 
+let name = "Александр Ганин", birthDate = "22.10.1989"
+
+print(name + " " + birthDate)
+
+print(name, birthDate)
 
 /*:
 ---
