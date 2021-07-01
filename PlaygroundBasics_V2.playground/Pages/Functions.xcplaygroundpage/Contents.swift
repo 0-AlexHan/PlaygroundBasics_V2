@@ -24,6 +24,14 @@ import Foundation
  */
 // Добавь код сюда:
 
+func calculateMin(firstNum: Int, secondNum: Int) -> Int {
+    return firstNum < secondNum ? firstNum : secondNum
+}
+
+calculateMin(firstNum: 31, secondNum: 3)
+
+
+
 /*:
 ---
 #### Задание 2
@@ -45,6 +53,22 @@ import Foundation
 
 // Добавь код сюда:
 
+func countDown(n: Int) {
+    for each in 0...n {
+        sleep(1)
+        
+        if each == 3 {
+            print("GO")
+            return
+        }
+        
+        print(n - each)
+       
+    }
+}
+
+countDown(n: 3)
+
 
 /*:
 ---
@@ -59,6 +83,13 @@ import Foundation
  */
 // Добавь код сюда:
 
+func repeatPrint(s: String, n: Int) {
+    for each in 0..<n {
+        print(s + " \(each + 1)й раз")
+    }
+}
+let stringToPrint = "Какая то строка напечатанная"
+repeatPrint(s: stringToPrint, n: 4)
 /*:
 ---
 #### Задание 4
@@ -72,6 +103,19 @@ import Foundation
  */
 // Добавь код сюда:
 
+func reverse(Array array: [Int]) -> [Int] {
+    var reversedArray = [Int]()
+    let last = array.count - 1
+    
+    for index in 0..<array.count {
+        reversedArray.append(array[last - index])
+    }
+        
+    return reversedArray
+}
+
+let reversedArray = reverse(Array: [1,2,3,4,5])
+print(reversedArray)
 /*:
 ---
 #### Задание 5
@@ -97,6 +141,22 @@ import Foundation
  */
 // Добавь код сюда:
 
+func factorial(n: Int) -> Int {
+    guard n < 20 else {
+        print("Слишком большое число")
+        return 0
+    }
+
+    if n == 0 {
+        return 1
+    } else {
+        return n * factorial(n: n - 1)
+    }
+}
+
+print("Факториал \(factorial(n: 5))")
+
+
 /*:
 ---
 #### Задание 6
@@ -119,6 +179,40 @@ import Foundation
 []
  */
 // Добавь код сюда:
+func filterDigitLength(array: [Int], digitLength: Int) -> [Int] {
+    var result = [Int]()
+    
+    for each in array {
+        switch each {
+            case 0...9:
+                if digitLength == 1 {
+                    result.append(each)
+                }
+            case 10...99:
+                if digitLength == 2 {
+                    result.append(each)
+                }
+            case 100...999:
+                if digitLength == 3 {
+                    result.append(each)
+                }
+            case 1000...9999:
+                if digitLength == 4 {
+                    result.append(each)
+                }
+            case 10000...99999:
+                if digitLength == 5 {
+                    result.append(each)
+                }
+            default:
+                return result
+        }
+    }
+    return result
+}
+
+let filteredByLengthOfDigits = filterDigitLength(array: [12,333,42,1,6666,3], digitLength: 1)
+print(filteredByLengthOfDigits)
 
 /*:
 ---
@@ -141,6 +235,26 @@ import Foundation
 ["jpg", "pdf", "mp3"]
  */
 // Добавь код сюда:
+
+func getExtension(fileNames: [String]) -> [String] {
+    var fileExtensions = [String]()
+    
+    for each in fileNames {
+        
+        let substring = each.drop(while: { $0 > "."})
+        fileExtensions.append(String(substring.dropFirst()))
+        
+    }
+    
+    
+    
+    
+    return fileExtensions
+}
+
+let fileExtensions = getExtension(fileNames: ["asdasdc.css", "krakosxf.jpeg"])
+print(fileExtensions)
+
 
 
 
