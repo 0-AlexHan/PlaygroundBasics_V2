@@ -23,6 +23,11 @@ import Foundation
  */
 // Добавь код сюда:
 
+let favorite = (film: "Man of Steel", city: "Kharkiv", meal: "PizzZZza")
+
+print(favorite.city)
+
+
 /*:
 ---
 #### Задание 2
@@ -37,6 +42,18 @@ import Foundation
 */
 
 // Добавь код сюда:
+
+func minMax(array: [Int]) -> (Int, Int) {
+    guard let min = array.min(), let max = array.max() else {
+        print("Тут пусто, поэтому вот нолики")
+        return (0, 0)
+    }
+        
+    return (min, max)
+}
+
+print("Мин значение: \(minMax(array: [1, 5, 7, 2, 0]).0) Макс значение: \(minMax(array: [1, 5, 7, 2, 0]).1)")
+
 
 /*:
 ---
@@ -55,8 +72,17 @@ import Foundation
  */
 
 // Добавь код сюда:
+enum Seasons: CaseIterable {
+    case winter, spring, summer, autumn
+}
 
+func allSeasons() {
+    for season in  Seasons.allCases {
+        print(season)
+    }
+}
 
+allSeasons()
 /*:
 ---
 #### Задание 4
@@ -72,6 +98,15 @@ import Foundation
  - Обьяви массив _money_, элементами которого являются кортежи _(amount, type)_. Проинициализируй массив любыми соответствующими его типу значениями.
 */
 // Добавь код сюда:
+
+enum CoinType: Int {
+    case penny = 1, nickle = 5, dime = 10, quarter = 25
+}
+
+var moneyArray: [(amount: Int, ofCoins: CoinType)] = [(1, .penny),(3, .nickle),(5, .dime),(9, .quarter)]
+
+
+
 /*:
  - Выведи в консоль общую стоимость монет.
  - Example: 😉\
@@ -82,6 +117,11 @@ import Foundation
 */
 // Добавь код сюда:
 
+var sumOfAll = 0
+moneyArray.forEach { (amount, coin) in
+    sumOfAll += amount * coin.rawValue
+}
+    print("Суммарная стоимость монет: \(sumOfAll)")
 /*:
 ---
 #### Задание 5
@@ -90,16 +130,27 @@ import Foundation
  */
 // Добавь код сюда:
 
+typealias Text = String
 /*:
  - Объяви три константы типа `Text`. Значения двух констант должны состоять только из цифр, третьей — из цифр и букв.
  */
 // Добавь код сюда:
 
+let textNums = "187"
+let anotherTextNums = "91"
+let textAndNums = "771 and some text"
 
 /*:
  - Из всех трех констант найди те, которые состоят только из цифр, и выведи их в консоль.
 */
 // Добавь код сюда:
+let numsOnly = [textNums, anotherTextNums, textAndNums, "для теста 1", "375"]
+
+numsOnly.forEach { (item) in
+    if let digit = Int(item) {
+        print("Строка только из чисел: \(digit)")
+    }
+}
 
 /*:
  - Создай псевдоним для типа `(numberOne: Text?, numberTwo: Text?)?` с именем _TupleType_.
@@ -107,11 +158,31 @@ import Foundation
  */
 // Добавь код сюда:
 
+typealias optionalTupleType = (numberOne: Text?, numberTwo: Text?)?
 /*:
  - Создай три переменные типа `TupleType`, содержащие следующие значения: _(“190”, “67”)_, _(“100”, nil)_, _(“-65”, “70”)_.
  - Выведите значения элементов тех кортежей, в которых ни один из элементов не инициализирован как `nil`.
  */
 // Добавь код сюда:
+
+var tupleTheFirst: optionalTupleType = ("190", "67")
+var tupleTheSecond: optionalTupleType = ("100", nil)
+var tupleTheThird: optionalTupleType = ("-65", "70")
+
+let tupleArray = [tupleTheFirst, tupleTheSecond, tupleTheThird]
+
+tupleArray.forEach { (item) in
+    guard let checkingFirstElement = item?.numberOne,
+          let checkingSecondElement = item?.numberTwo
+    else {
+        return
+    }
+    
+    print(checkingFirstElement,checkingSecondElement)
+    
+}
+
+
 
 
 //: [Назад: Замыкания](@previous)  |  Страница 8  |  [Вперед: Коллекции. Словари](@next)
