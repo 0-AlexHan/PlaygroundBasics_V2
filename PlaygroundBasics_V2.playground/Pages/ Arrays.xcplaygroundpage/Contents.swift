@@ -164,6 +164,32 @@ print("Общие элементы: \(sameElements)")
 */
 // Добавь код сюда:
 
+var angola = "Angola"
+var brazil = "Brazil"
+var denmark = "Denmark"
+var argentina = "Argentina"
+var germany = "Germany"
+
+var kenya = "Kenya"
+var liechtenstein = "Liechtenstein"
+var morokko = "Morokko"
+var monako = "Monako"
+var usa = "USA"
+
+
+let countriesArray = [angola, brazil, denmark, argentina, germany, kenya, liechtenstein, morokko, monako, usa]
+var moreThanFiveChars = [String]()
+countriesArray.forEach { (country) in
+    if country.count > 5 {
+        if country.contains("A") {
+            moreThanFiveChars.append(country.replacingOccurrences(of: "A", with: "i"))
+        } else {
+            moreThanFiveChars.append(country)
+        }
+    }
+}
+
+print(moreThanFiveChars)
 
 /*:
 ---
@@ -188,6 +214,15 @@ False
 */
 
 // Добавь код сюда:
+
+let a = [1, 2, 9]
+let b = [1, 9, 8, 5, 7, 2, 3]
+
+let aSet = Set(a)
+let bSet = Set(b)
+
+print(aSet.isSubset(of: bSet))
+
 
 //: [Назад: Простые типы данных](@previous)  |  Страница 4  |  [Вперед: Управление потоком](@next)
 
