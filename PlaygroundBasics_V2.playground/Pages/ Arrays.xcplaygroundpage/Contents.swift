@@ -21,6 +21,7 @@ import Foundation
 */
 // Добавь код сюда:
 
+var listOfNumbers: [Int] = [1, 7, 2, 4, 8, 9]
 /*:
  - Выведи в консоль максимальное значение из этого массива.
  - Example: 😉\
@@ -31,7 +32,15 @@ import Foundation
 */
 // Добавь код сюда:
 
+func getSafeMaxValueFrom(Array array: [Int]) -> String {
+    guard let maxValue = array.max() else {
+        return "Something went wrong"
+    }
+    
+    return "Max value is \(maxValue)"
+}
 
+print(getSafeMaxValueFrom(Array: listOfNumbers))
 /*:
  - Выведи в консоль все нечетные числа из этого массива.
  - Example: 😉\
@@ -41,7 +50,7 @@ import Foundation
  Odd numbers: 3, 7
  */
 // Добавь код сюда:
-
+print("Все нечетные числа: \(listOfNumbers.filter {$0 & 1 != 0})")
 /*:
  - Выведи в консоль сумму всех элементов массива.
  - Example: 😉\
@@ -52,6 +61,7 @@ import Foundation
  */
 // Добавь код сюда:
 
+print("Сумма всех чисел в массиве: \(listOfNumbers.reduce(0) {$0 + $1})")
 /*:
  - Выведи в консоль все числа из этого массива, которые расположены по нечетным индексам.
  - Example: 😉\
@@ -62,6 +72,8 @@ import Foundation
  */
 // Добавь код сюда:
 
+let oddIndices = stride(from: 1, to: listOfNumbers.count, by: 2).map {listOfNumbers[$0]}
+print(oddIndices)
 /*:
  - Выведи в консоль числа из этого массива в обратном порядке.
  - Example: 😉\
@@ -72,6 +84,9 @@ import Foundation
  */
 // Добавь код сюда:
 
+let reversedArray = Array(listOfNumbers.reversed())
+
+print(reversedArray)
 /*:
  - Получи новый массив, путем сортировки массива по возрастанию.
  - Выведи его в консоль.
@@ -87,11 +102,15 @@ import Foundation
  */
 // Добавь код сюда:
 
+let sortedArray = listOfNumbers.sorted(by: <)
+
+print("Массив по убыванию: \(sortedArray)")
 /*:
  - Обьяви целочисленную переменную _x_ и присвой ей любое значение.
   */
 // Добавь код сюда:
 
+var x: Int = 8
 /*:
  - Проверь наличие _x_ в массиве _listOfNumbers_. Если есть, выведи в консоль _true_, если нет - _false_.
  - Example: 😉\
@@ -102,7 +121,7 @@ import Foundation
  true
  */
 // Добавь код сюда:
-
+print("Х равен \(x), содержит ли массив переменную Х: \(listOfNumbers.contains(x))")
 /*:
 ---
 #### Задание 2
@@ -111,6 +130,7 @@ import Foundation
  */
 // Добавь код сюда:
 
+var otherNumbers: [Int] = [13, 11, 3, 7, 5, 1]
 /*:
  - Выведи в консоль все элементы из массива _listOfNumbers_, которые есть в массиве _otherNumbers_.
  - Example: 😉\
@@ -131,7 +151,8 @@ import Foundation
  */
 // Добавь код сюда:
 
-
+let sameElements = listOfNumbers.filter() {otherNumbers.contains($0)}
+print("Общие элементы: \(sameElements)")
 /*:
 ---
 ### Продвинутый уровень:
@@ -143,6 +164,32 @@ import Foundation
 */
 // Добавь код сюда:
 
+var angola = "Angola"
+var brazil = "Brazil"
+var denmark = "Denmark"
+var argentina = "Argentina"
+var germany = "Germany"
+
+var kenya = "Kenya"
+var liechtenstein = "Liechtenstein"
+var morokko = "Morokko"
+var monako = "Monako"
+var usa = "USA"
+
+
+let countriesArray = [angola, brazil, denmark, argentina, germany, kenya, liechtenstein, morokko, monako, usa]
+var moreThanFiveChars = [String]()
+countriesArray.forEach { (country) in
+    if country.count > 5 {
+        if country.contains("A") {
+            moreThanFiveChars.append(country.replacingOccurrences(of: "A", with: "i"))
+        } else {
+            moreThanFiveChars.append(country)
+        }
+    }
+}
+
+print(moreThanFiveChars)
 
 /*:
 ---
@@ -167,6 +214,15 @@ False
 */
 
 // Добавь код сюда:
+
+let a = [1, 2, 9]
+let b = [1, 9, 8, 5, 7, 2, 3]
+
+let aSet = Set(a)
+let bSet = Set(b)
+
+print(aSet.isSubset(of: bSet))
+
 
 //: [Назад: Простые типы данных](@previous)  |  Страница 4  |  [Вперед: Управление потоком](@next)
 
