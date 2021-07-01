@@ -144,6 +144,13 @@ print(name, birthDate)
 */
 // Добавь код сюда:
 
+let firstCountry = "USA", secondCountry = "Brazil", thirdCountry = "Albania", foursCountry = "Belgium", fifthCountry = "Brunei"
+
+let arrayOfCountries = [firstCountry, secondCountry, thirdCountry, foursCountry, fifthCountry]
+
+print(arrayOfCountries.filter {$0.contains("A")})
+
+
 /*:
 ---
 #### Задание 8:
@@ -154,6 +161,14 @@ print(name, birthDate)
 */
 // Добавь код сюда:
 
+let pointlessString = "джлоцукячстьбтимсищгйцуша"
+
+var capitalizedPointLessString = pointlessString.uppercased()
+let lowercasedLat = capitalizedPointLessString.applyingTransform(.toLatin, reverse: false)
+
+for (index, char) in lowercasedLat!.enumerated() {
+    print("Индекс: \(index), буква: \(char)")
+}
 /*:
 ---
 #### Задание 9:
