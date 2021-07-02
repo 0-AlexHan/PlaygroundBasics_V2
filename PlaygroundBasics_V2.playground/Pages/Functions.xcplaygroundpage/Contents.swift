@@ -54,17 +54,20 @@ calculateMin(firstNum: 31, secondNum: 3)
 // Добавь код сюда:
 
 func countDown(n: Int) {
-    for each in 0...n {
-        sleep(1)
-        
-        if each == 3 {
-            print("GO")
-            return
+    
+        let delayInSeconds: Double = 1
+        var count = 0
+    
+        Timer.scheduledTimer(withTimeInterval: delayInSeconds, repeats: true) { (timer) in
+            if count == 3 {
+                print("GO")
+                timer.invalidate()
+                
+                return
+            }
+            print(n - count)
+            count += 1
         }
-        
-        print(n - each)
-       
-    }
 }
 
 countDown(n: 3)
@@ -181,37 +184,17 @@ print("Факториал \(factorial(n: 5))")
 // Добавь код сюда:
 func filterDigitLength(array: [Int], digitLength: Int) -> [Int] {
     var result = [Int]()
-    
+   
     for each in array {
-        switch each {
-            case 0...9:
-                if digitLength == 1 {
-                    result.append(each)
-                }
-            case 10...99:
-                if digitLength == 2 {
-                    result.append(each)
-                }
-            case 100...999:
-                if digitLength == 3 {
-                    result.append(each)
-                }
-            case 1000...9999:
-                if digitLength == 4 {
-                    result.append(each)
-                }
-            case 10000...99999:
-                if digitLength == 5 {
-                    result.append(each)
-                }
-            default:
-                return result
+        
+        if Int(floor(log10(Double(each)))) + 1 == digitLength {
+            result.append(each)
         }
     }
     return result
 }
 
-let filteredByLengthOfDigits = filterDigitLength(array: [12,333,42,1,6666,3], digitLength: 1)
+let filteredByLengthOfDigits = filterDigitLength(array: [12,333,42,1,6666,3], digitLength: 4)
 print(filteredByLengthOfDigits)
 
 /*:
@@ -240,23 +223,14 @@ func getExtension(fileNames: [String]) -> [String] {
     var fileExtensions = [String]()
     
     for each in fileNames {
-        
-        let substring = each.drop(while: { $0 > "."})
-        fileExtensions.append(String(substring.dropFirst()))
-        
+        fileExtensions.append((each.components(separatedBy: ".")[1]))
     }
-    
-    
-    
     
     return fileExtensions
 }
 
 let fileExtensions = getExtension(fileNames: ["asdasdc.css", "krakosxf.jpeg"])
 print(fileExtensions)
-
-
-
 
 /*:
 ---
