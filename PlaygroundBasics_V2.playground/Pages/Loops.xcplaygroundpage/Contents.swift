@@ -284,6 +284,17 @@ _Output:_\
 */
 // Добавь код сюда:
 
+func isIsogram(_ word: String) -> Bool {
+    let isogram = word.lowercased()
+    return isogram.count == Set(isogram).count
+}
+
+let word = "Password"
+let anotherWord = "Algorism"
+
+print(isIsogram(word))
+print(isIsogram(anotherWord))
+
 /*:
 ---
 #### Задание 5:
@@ -300,7 +311,16 @@ _Output:_\
 */
 // Добавь код сюда:
 
+let someWord = "Hello"
+let characters = Array(someWord)
+var result = ""
 
+characters.forEach { (char) in
+    for _ in 1 ... 3 {
+        result += String(char)
+    }
+}
+print(result)
 /*:
 ---
 #### Задание 6:
@@ -316,5 +336,9 @@ _Output:_\
  [1, 2]
 */
 // Добавь код сюда:
+
+let arrayWithCharsAndInts: [Any] = [1, 2, "a", "b"].compactMap { $0 as? Int}
+
+print(arrayWithCharsAndInts)
 
 //: [Назад: Коллекции. Массивы и множества](@previous)  |  Страница 5  |  [Вперед:  Функции](@next)
