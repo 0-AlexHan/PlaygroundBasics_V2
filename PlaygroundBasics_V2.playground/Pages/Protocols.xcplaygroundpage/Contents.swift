@@ -118,6 +118,8 @@ class iPhone: Cellular, Touchable, Internetable {
     func accessInternet() {}
     func makeCall() {}
     func hangUp() {}
+    
+    func iOS() {}
 }
 class Androidphone: Cellular, Touchable, Internetable {
     func sendSMS() {}
@@ -125,6 +127,8 @@ class Androidphone: Cellular, Touchable, Internetable {
     func accessInternet() {}
     func makeCall() {}
     func hangUp() {}
+    
+    func androidOS() {}
 }
 
 class Windosphone: Cellular, Touchable, Internetable {
@@ -133,6 +137,8 @@ class Windosphone: Cellular, Touchable, Internetable {
     func accessInternet() {}
     func makeCall() {}
     func hangUp() {}
+    
+    func windowsOS() {}
 }
 
 
