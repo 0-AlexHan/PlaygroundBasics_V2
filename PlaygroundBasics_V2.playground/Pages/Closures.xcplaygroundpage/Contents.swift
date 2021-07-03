@@ -34,12 +34,24 @@ import Foundation
  */
 // Добавь код сюда:
 
+func applyKTimes(k: Int, closureTime: () -> Void) {
+    for _ in 0 ..< k {
+        closureTime()
+    }
+}
+
+applyKTimes(k: 4) {
+    print("We ❤️ Swift")
+}
+
 /*:
 ---
 #### Задание 2
  - Обьяви переменную _numbers_, представляющую собой массив, который соостоит из целых чисел. Проицинициализируй его любыми значениями.
  */
 // Добавь код сюда:
+
+var numbers = [2, 35, 1, 2, 11, 5, 4, 7]
 
 /*:
  - Создай новый массив _multiples_, состоящий из всех кратных 3 чисел исходного массива.
@@ -62,6 +74,8 @@ import Foundation
  */
 // Добавь код сюда:
 
+let multiples = numbers.filter({ $0 % 3 == 0 })
+print(multiples.isEmpty ? "No data" : multiples)
 /*:
  - Найди наибольшее число из исходного массива _numbers_ и выведи его в консоль.
  - Note: 👆 _Для реализации задачи используй метод `reduce`._
@@ -74,7 +88,14 @@ import Foundation
  Max: 12
  */
 // Добавь код сюда:
-
+let highest = numbers.reduce(Int.min, {
+    if $0 > $1 {
+        return $0
+    } else {
+        return $1
+    }
+})
+print(highest)
 /*:
 ---
 #### Задание 3
@@ -94,6 +115,15 @@ import Foundation
 
 // Добавь код сюда:
 
+func forEach(array: [Int], increment: (Int) -> Void) {
+    for each in array {
+        increment(each)
+    }
+}
+
+forEach(array: numbers) {
+    print($0 + 1)
+}
 /*:
 ---
 ### Продвинутый уровень:
@@ -137,6 +167,17 @@ _Output:_\
 */
 // Добавь код сюда:
 
+
+let array2D: [[Int]] = [[1, 0, 0],
+                        [0, 1, 0],
+                        [0, 0, 1]].map { $0.map { 1 - $0 } }
+
+array2D.forEach { (print2D) in
+    print(print2D)
+}
+
+
+
 /*:
 ---
 ## Задание 6:
@@ -146,7 +187,14 @@ _Output:_\
 */
 // Добавь код сюда:
 
+func fooWith(closure: () -> Void) {
+    print("This is function")
+    closure()
+}
 
+fooWith {
+    print("This is closure")
+}
 /*:
 ---
 #### Задание 7:
@@ -154,9 +202,6 @@ _Output:_\
 */
 // Добавь код сюда:
 
-var animals = ["fish", "cat", "chicken", "dog"]
-let sortedAnimals = animals.sort { (one: String, two: String) -> Bool in
-  return one < two
-}
-
+var animals = ["fish", "cat", "chicken", "dog"].sorted(by: <)
+print(animals)
 //: [Назад: Функции](@previous)  |  Страница 7  |  [Вперед: Кортежи, перечисления и псевдонимы](@next)
