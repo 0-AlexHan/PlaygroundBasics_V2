@@ -167,6 +167,17 @@ _Output:_\
 */
 // Добавь код сюда:
 
+
+let array2D: [[Int]] = [[1, 0, 0],
+                        [0, 1, 0],
+                        [0, 0, 1]].map { $0.map { 1 - $0 } }
+
+array2D.forEach { (print2D) in
+    print(print2D)
+}
+
+
+
 /*:
 ---
 ## Задание 6:
@@ -176,7 +187,14 @@ _Output:_\
 */
 // Добавь код сюда:
 
+func fooWith(closure: () -> Void) {
+    print("This is function")
+    closure()
+}
 
+fooWith {
+    print("This is closure")
+}
 /*:
 ---
 #### Задание 7:
@@ -184,9 +202,6 @@ _Output:_\
 */
 // Добавь код сюда:
 
-var animals = ["fish", "cat", "chicken", "dog"]
-let sortedAnimals = animals.sort { (one: String, two: String) -> Bool in
-  return one < two
-}
-
+var animals = ["fish", "cat", "chicken", "dog"].sorted(by: <)
+print(animals)
 //: [Назад: Функции](@previous)  |  Страница 7  |  [Вперед: Кортежи, перечисления и псевдонимы](@next)
