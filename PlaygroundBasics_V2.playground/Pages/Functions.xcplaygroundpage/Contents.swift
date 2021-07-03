@@ -24,6 +24,14 @@ import Foundation
  */
 // Добавь код сюда:
 
+func calculateMin(firstNum: Int, secondNum: Int) -> Int {
+    return firstNum < secondNum ? firstNum : secondNum
+}
+
+calculateMin(firstNum: 31, secondNum: 3)
+
+
+
 /*:
 ---
 #### Задание 2
@@ -45,6 +53,25 @@ import Foundation
 
 // Добавь код сюда:
 
+func countDown(n: Int) {
+
+        let delayInSeconds: Double = 1
+        var count = 0
+
+        Timer.scheduledTimer(withTimeInterval: delayInSeconds, repeats: true) { (timer) in
+            if count == 3 {
+                print("GO")
+                timer.invalidate()
+
+                return
+            }
+            print(n - count)
+            count += 1
+        }
+}
+
+countDown(n: 3)
+
 
 /*:
 ---
@@ -59,6 +86,13 @@ import Foundation
  */
 // Добавь код сюда:
 
+func repeatPrint(s: String, n: Int) {
+    for each in 0..<n {
+        print(s + " \(each + 1)й раз")
+    }
+}
+let stringToPrint = "Какая то строка напечатанная"
+repeatPrint(s: stringToPrint, n: 4)
 /*:
 ---
 #### Задание 4
@@ -72,6 +106,19 @@ import Foundation
  */
 // Добавь код сюда:
 
+func reverse(Array array: [Int]) -> [Int] {
+    var reversedArray = [Int]()
+    let last = array.count - 1
+    
+    for index in 0..<array.count {
+        reversedArray.append(array[last - index])
+    }
+        
+    return reversedArray
+}
+
+let reversedArray = reverse(Array: [1,2,3,4,5])
+print(reversedArray)
 /*:
 ---
 #### Задание 5
@@ -97,6 +144,22 @@ import Foundation
  */
 // Добавь код сюда:
 
+func factorial(n: Int) -> Int {
+    guard n < 20 else {
+        print("Слишком большое число")
+        return 0
+    }
+
+    if n == 0 {
+        return 1
+    } else {
+        return n * factorial(n: n - 1)
+    }
+}
+
+print("Факториал \(factorial(n: 5))")
+
+
 /*:
 ---
 #### Задание 6
@@ -119,6 +182,20 @@ import Foundation
 []
  */
 // Добавь код сюда:
+func filterDigitLength(array: [Int], digitLength: Int) -> [Int] {
+    var result = [Int]()
+   
+    for each in array {
+        
+        if Int(floor(log10(Double(each)))) + 1 == digitLength {
+            result.append(each)
+        }
+    }
+    return result
+}
+
+let filteredByLengthOfDigits = filterDigitLength(array: [12,333,42,1,6666,3], digitLength: 4)
+print(filteredByLengthOfDigits)
 
 /*:
 ---
@@ -142,7 +219,18 @@ import Foundation
  */
 // Добавь код сюда:
 
+func getExtension(fileNames: [String]) -> [String] {
+    var fileExtensions = [String]()
+    
+    for each in fileNames {
+        fileExtensions.append((each.components(separatedBy: ".")[1]))
+    }
+    
+    return fileExtensions
+}
 
+let fileExtensions = getExtension(fileNames: ["asdasdc.css", "krakosxf.jpeg"])
+print(fileExtensions)
 
 /*:
 ---
@@ -164,6 +252,27 @@ Sum of missing numbers = 29
 
 // Добавь код сюда:
 
+
+let numbers = [1, 3, 5, 7, 10]
+
+func getSumOfMissingNums(array: [Int]) -> Int {
+    guard let min = array.min() else {
+        return 0
+    }
+    guard let max = array.max() else {
+        return 0
+    }
+    
+    let numbers = Set(array)
+    var setFromRange = Set(min ... max)
+    
+    setFromRange.subtract(numbers)
+    
+    return setFromRange.reduce(0, +)
+}
+
+print( getSumOfMissingNums(array: numbers) )
+
 /*:
 ---
 #### Задание 9:
@@ -183,6 +292,28 @@ _Output:_\
 "A-Bb-Cccc=Dddd"
 */
 // Добавь код сюда:
+
+func letters(string: String) -> String {
+    var resultString = String()
+    let separators: [String] = ["-", "+", "=", "%", "!", "&", "?"]
+    
+    for (amount, char) in string.enumerated() {
+        let separator = separators[Int.random(in: 0 ... separators.count - 1)]
+        
+        for _ in 0 ... amount {
+            resultString += String(char)
+        }
+        
+        if amount != string.count - 1 {
+            resultString += separator
+        }
+    }
+    
+    return resultString.capitalized
+}
+
+print(letters(string: "abcdef"))
+
 
 
 /*:
@@ -204,6 +335,22 @@ This Is A Title
 
 // Добавь код сюда:
 
+
+
+func makeTitle(_ title: String) -> String {
+    let resultString = title.split(separator: " ").map { (string) -> String in
+        return string.capitalized
+    }.joined(separator: " ")
+    
+    return resultString
+}
+
+let title = "This is a title"
+
+print(makeTitle(title))
+
+
+
 /*:
 ---
 #### Задание 11:
@@ -220,6 +367,19 @@ D shows 2 times
 */
 
 // Добавь код сюда:
+
+func countLetter(_ letter: Character, in array: [Character]) -> Int {
+    
+    return array.filter {$0 == letter}.count
+}
+
+let letters: [Character] = ["D","E", "Y", "H", "A", "D", "H", "Z", "X", "B"]
+let letter: Character = "H"
+
+let times = countLetter(letter, in: letters)
+
+print("\(letter) shows \(times) times")
+
 
 /*:
 ---
@@ -243,6 +403,21 @@ False
 */
 
 // Добавь код сюда:
+
+func checkIs(superset: Set<Int>, of: [Set<Int>]) -> Bool {
+    for each in of {
+        if !each.isSubset(of: superset) {
+            return false
+        }
+    }
+    return true
+}
+
+let givenSetOfNums: [Set<Int>] = [[1, 2], [2, 3], [1, 3], [1, 2, 3]]
+let superset: Set<Int> = [1, 2, 3]
+
+print(checkIs(superset: superset, of: givenSetOfNums))
+
 
 //: [Назад: Управление потоком](@previous)  |  Страница 6  |  [Вперед: Замыкания](@next)
 
