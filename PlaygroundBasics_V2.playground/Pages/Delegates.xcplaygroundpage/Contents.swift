@@ -19,11 +19,11 @@ import Foundation
 // Добавь код сюда:
 
 
-protocol AlarmDelegate {
+protocol AlarmDelegate: AnyObject { // пишет что сlass is deprecated, и говорит использовать AnyObject вместо него. (Xcode 12.5.1)
     func clockDidAlarm()
 }
 
-class Me : AlarmDelegate {
+class Me {
     private let alarmClock = AlarmClock()
     
     func turnOnAlarm() {
@@ -32,14 +32,18 @@ class Me : AlarmDelegate {
         alarmClock.turnOn()
     }
     
-    func clockDidAlarm() {
-        print("Будильник звонит. Проснулись.")
-        self.turnOffAlarm()
-    }
+   
     
 private func turnOffAlarm() {
         print("Выключаем будильник")
         alarmClock.turnOff()
+    }
+}
+
+extension Me : AlarmDelegate {
+    func clockDidAlarm() {
+        print("Будильник звонит. Проснулись.")
+        self.turnOffAlarm()
     }
 }
 
@@ -57,6 +61,8 @@ class AlarmClock {
     }
 }
 
+
+
 let me = Me()
 me.turnOnAlarm()
 
@@ -71,12 +77,12 @@ me.turnOnAlarm()
 // Добавь код сюда:
 import UIKit
 
-protocol WorkerDelegate {
-    func chooseColor()
+protocol WorkerDelegate: AnyObject {
+    func didChooseColor()
     func didFinishWork()
 }
 
-class MeAgain : WorkerDelegate {
+class MeAgain {
     let worker = Worker()
     let color = #colorLiteral(red: 0.5568627715, green: 0.3529411852, blue: 0.9686274529, alpha: 1)
     func hireWorker() {
@@ -88,7 +94,10 @@ class MeAgain : WorkerDelegate {
         worker.preparingToWork()
     }
     
-    func chooseColor() {
+
+}
+extension MeAgain : WorkerDelegate {
+    func didChooseColor() {
         print("Строитель звонил узнать цвет. Выбираем цвет \(color)")
         worker.continueWork()
     }
@@ -99,7 +108,7 @@ class MeAgain : WorkerDelegate {
 }
 
 class Worker {
-    var delegate: WorkerDelegate?
+    weak var delegate: WorkerDelegate?
     
     func preparingToWork() {
         print("Строитель делает подготовительные работы")
@@ -109,7 +118,7 @@ class Worker {
     
     func timeToPaintWalls() {
         print("Пришло время красить стены")
-        delegate?.chooseColor()
+        delegate?.didChooseColor()
     }
     
     func continueWork() {
