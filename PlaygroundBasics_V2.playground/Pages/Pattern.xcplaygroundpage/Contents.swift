@@ -36,6 +36,71 @@ import Foundation
 
 // Добавь код сюда:
 
+protocol PizzZzaProducts : AnyObject {
+    var pizzaName: String { get }
+    
+    func didStartCooking()
+    
+}
+
+class CheesePizza {
+    
+}
+
+extension CheesePizza : PizzZzaProducts {
+    var pizzaName: String {
+        return "Пицца с сыром"
+    }
+    
+    func didStartCooking() {
+        print("Начали готовить пиццу с сыром")
+    }
+}
+
+class PepperoniPizza {
+    
+}
+
+extension PepperoniPizza : PizzZzaProducts {
+    var pizzaName: String {
+        return "Пицца Пепперони"
+    }
+    
+    func didStartCooking() {
+        print("Начали готовить пиццу Пепперони")
+    }
+}
+
+enum Menu {
+    case pepperoni, cheesePizza
+}
+
+class PizzZzaFactory {
+    static let singleFactory = PizzZzaFactory()
+    
+    private init() { }
+    
+    
+    func createSomePizza(withName name: Menu) -> PizzZzaProducts {
+        switch name {
+            case .pepperoni:
+                return PepperoniPizza()
+            case .cheesePizza:
+                return CheesePizza()
+        }
+    }
+}
+func customersOrder(pizza: Menu) -> PizzZzaProducts {
+    return PizzZzaFactory.singleFactory.createSomePizza(withName: pizza)
+}
+ 
+let pepperoni = customersOrder(pizza: .pepperoni)
+let cheesePizza = customersOrder(pizza: .cheesePizza)
+
+
+
+
+
 /*:
 ---
 #### Задание 2
@@ -44,6 +109,260 @@ import Foundation
 */
 
 // Добавь код сюда:
+
+enum FuelType {
+    case notConsume, gasoline, electric
+}
+
+protocol Bicycle {
+    var name: String { get }
+    var fuel: FuelType { get }
+    var peopleCapacity: Int { get }
+    
+    func didInUse() -> Bool
+    
+}
+
+protocol Car {
+    var name: String { get }
+    var fuel: FuelType { get }
+    var peopleCapacity: Int { get }
+    
+    func didInUse() -> Bool
+}
+
+protocol ElectricScooter {
+    var name: String { get }
+    var fuel: FuelType { get }
+    var peopleCapacity: Int { get }
+    
+    func didInUse() -> Bool
+}
+
+protocol Scooter {
+    var name: String { get }
+    var fuel: FuelType { get }
+    var peopleCapacity: Int { get }
+    
+    func didInUse() -> Bool
+}
+
+protocol Motocycle {
+    var name: String { get }
+    var fuel: FuelType { get }
+    var peopleCapacity: Int { get }
+    
+    func didInUse() -> Bool
+}
+
+protocol AbstcractFactory {
+    func didCreateBicycle() -> Bicycle
+    func didCreateCar() -> Car
+    func didCreateElectricScooter() -> ElectricScooter
+    func didCreateScooter() -> Scooter
+    func didCreateMotocycle() -> Motocycle
+}
+
+class SomeBicycle {
+    let used: Bool
+    
+    init(isUsed: Bool) {
+        self.used = isUsed
+    }
+}
+
+extension SomeBicycle : Bicycle {
+     
+    var name: String {
+        return "Велосипед"
+    }
+    
+    var fuel: FuelType {
+        return .notConsume
+    }
+    
+    var peopleCapacity: Int {
+        return 1
+    }
+    
+    func didInUse() -> Bool {
+        return used
+    }
+}
+
+class SomeCar {
+    let used: Bool
+    
+    init(isUsed: Bool) {
+        self.used = isUsed
+    }
+}
+
+extension SomeCar : Car {
+
+    var name: String {
+        return "АВТОМОБИЛЬ"
+    }
+
+    var fuel: FuelType {
+        return .gasoline
+    }
+
+    var peopleCapacity: Int {
+        return 4
+    }
+    
+    func didInUse() -> Bool {
+        return used
+    }
+}
+
+class SomeElectricScooter {
+    let used: Bool
+    
+    init(isUsed: Bool) {
+        self.used = isUsed
+    }
+}
+
+extension SomeElectricScooter : ElectricScooter {
+    var name: String {
+        return "Электросамокат"
+    }
+
+    var fuel: FuelType {
+        return .electric
+    }
+
+    var peopleCapacity: Int {
+        return 1
+    }
+    
+    func didInUse() -> Bool {
+        return used
+    }
+}
+
+class SomeScooter {
+    let used: Bool
+    
+    init(isUsed: Bool) {
+        self.used = isUsed
+    }
+}
+
+extension SomeScooter : Scooter {
+    
+    var name: String {
+        return "Скутер"
+    }
+
+    var fuel: FuelType {
+        return .gasoline
+    }
+
+    var peopleCapacity: Int {
+        return 2
+    }
+    
+    func didInUse() -> Bool {
+        return used
+    }
+}
+
+class SomeMotocycle {
+    let used: Bool
+    
+    init(isUsed: Bool) {
+        self.used = isUsed
+    }
+}
+
+extension SomeMotocycle : Motocycle {
+    var name: String {
+        return "Мотоссыкл"
+    }
+
+    var fuel: FuelType {
+        return .gasoline
+    }
+
+    var peopleCapacity: Int {
+         return 2
+    }
+    
+    func didInUse() -> Bool {
+        return used
+    }
+}
+
+class UsedVehiclesFactory : AbstcractFactory {
+    
+    static let singleFactory = UsedVehiclesFactory()
+    
+    private init() { }
+    
+    func didCreateBicycle() -> Bicycle {
+        return SomeBicycle(isUsed: true)
+    }
+
+    func didCreateCar() -> Car {
+        return SomeCar(isUsed: true)
+    }
+
+    func didCreateElectricScooter() -> ElectricScooter {
+        return SomeElectricScooter(isUsed: true)
+    }
+
+    func didCreateScooter() -> Scooter {
+        return SomeScooter(isUsed: true)
+    }
+
+    func didCreateMotocycle() -> Motocycle {
+        return SomeMotocycle(isUsed: true)
+    }
+    
+    
+}
+
+class NewVehiclesFactory {
+    static let singleFactory = NewVehiclesFactory()
+    
+    private init() { }
+    
+    func didCreateBicycle() -> Bicycle {
+        return SomeBicycle(isUsed: false)
+    }
+
+    func didCreateCar() -> Car {
+        return SomeCar(isUsed: false)
+    }
+
+    func didCreateElectricScooter() -> ElectricScooter {
+        return SomeElectricScooter(isUsed: false)
+    }
+
+    func didCreateScooter() -> Scooter {
+        return SomeScooter(isUsed: false)
+    }
+
+    func didCreateMotocycle() -> Motocycle {
+        return SomeMotocycle(isUsed: false)
+    }
+}
+
+let someNewVehicle = NewVehiclesFactory.singleFactory.didCreateBicycle()
+if someNewVehicle.didInUse() { print("Новый") } else { print("Потасканный") }
+print(someNewVehicle.name)
+print(someNewVehicle.fuel)
+print(someNewVehicle.peopleCapacity, "чел.")
+
+let someUsedVehicle = UsedVehiclesFactory.singleFactory.didCreateCar()
+
+if someUsedVehicle.didInUse() { print("Новый") } else { print("Потасканный") }
+print(someUsedVehicle.name)
+print(someUsedVehicle.fuel)
+print(someUsedVehicle.peopleCapacity, "чел.")
 
 
 /*:
@@ -82,6 +401,87 @@ import Foundation
 */
 
 // Добавь код сюда:
+
+class Responder {
+    private var trash: String
+    private var nextResponder: Responder?
+    
+    init(trash: String) {
+        self.trash = trash
+    }
+    
+    func setNext(responder next: Responder) {
+        self.nextResponder = next
+    }
+    
+    func checking(trash type: String) {
+        if trash == type {
+            print("\(type) trash were recycled")
+        } else if let next = nextResponder {
+            print("Can't handle \(type). Transfering to the next responder ")
+             next.checking(trash: type)
+        } else {
+            print("Adding to warehouse")
+            Warehouse.warehouseInstance.addToWarehouse(trash: type)
+        }
+    }
+}
+
+class TrashRecycle {
+    private var foodWaste: Responder
+    private var electronic: Responder
+    private var papper: Responder
+    private var glass: Responder
+    
+    init(foodWaste: Responder, electronic: Responder,
+         papper: Responder, glass: Responder) {
+        
+        self.foodWaste = foodWaste
+        self.electronic = electronic
+        self.papper = papper
+        self.glass = glass
+    }
+    
+    func recycle(trash: String) {
+        
+        foodWaste.checking(trash: trash)
+    }
+    
+}
+
+class Warehouse {
+    private var garbageCollection = [String]()
+    
+    static let warehouseInstance = Warehouse()
+    
+    private init(){}
+    
+    func addToWarehouse(trash type: String) -> String {
+        
+        garbageCollection.append(type)
+        return "Added to warehouse"
+    }
+    
+    func getGarbage() {
+        print(garbageCollection)
+    }
+}
+let foodWasteResponder = Responder(trash: "Food")
+let electronicResponder = Responder(trash: "Electronics")
+let papperResponder = Responder(trash: "Papper")
+let glassResponder = Responder(trash: "Glass")
+
+foodWasteResponder.setNext(responder: electronicResponder)
+electronicResponder.setNext(responder: papperResponder)
+papperResponder.setNext(responder: glassResponder)
+
+let trashRecycle = TrashRecycle(foodWaste: foodWasteResponder, electronic: electronicResponder, papper: papperResponder, glass: glassResponder)
+
+trashRecycle.recycle(trash: "Glass")
+trashRecycle.recycle(trash: "Papper")
+trashRecycle.recycle(trash: "Plastic")
+
+Warehouse.warehouseInstance.getGarbage()
 
 
 /*:
