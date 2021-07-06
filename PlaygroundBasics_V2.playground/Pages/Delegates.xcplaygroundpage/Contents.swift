@@ -18,6 +18,55 @@ import Foundation
 
 // Добавь код сюда:
 
+
+protocol AlarmDelegate: AnyObject { // пишет что сlass is deprecated, и говорит использовать AnyObject вместо него. (Xcode 12.5.1)
+    func clockDidAlarm()
+}
+
+class Me {
+    private let alarmClock = AlarmClock()
+    
+    func turnOnAlarm() {
+        alarmClock.delegate = self
+        print("Ложимся спать. Включаем будильник")
+        alarmClock.turnOn()
+    }
+    
+   
+    
+private func turnOffAlarm() {
+        print("Выключаем будильник")
+        alarmClock.turnOff()
+    }
+}
+
+extension Me : AlarmDelegate {
+    func clockDidAlarm() {
+        print("Будильник звонит. Проснулись.")
+        self.turnOffAlarm()
+    }
+}
+
+class AlarmClock {
+    
+    var delegate: AlarmDelegate?
+    
+    func turnOn() {
+        print("Будильник включен")
+        delegate?.clockDidAlarm()
+    }
+    
+    func turnOff() {
+        print("Будильник выключен")
+    }
+}
+
+
+
+let me = Me()
+me.turnOnAlarm()
+
+
 /*:
 ---
 ## Задание 2
@@ -26,5 +75,66 @@ import Foundation
 ![Delegate.Task2](Playground.Delegate.Task2.png)
 */
 // Добавь код сюда:
+import UIKit
+
+protocol WorkerDelegate: AnyObject {
+    func didChooseColor()
+    func didFinishWork()
+}
+
+class MeAgain {
+    let worker = Worker()
+    let color = #colorLiteral(red: 0.5568627715, green: 0.3529411852, blue: 0.9686274529, alpha: 1)
+    func hireWorker() {
+        worker.delegate = self
+        
+        print("Нанимаем строителя")
+        
+        
+        worker.preparingToWork()
+    }
+    
+
+}
+extension MeAgain : WorkerDelegate {
+    func didChooseColor() {
+        print("Строитель звонил узнать цвет. Выбираем цвет \(color)")
+        worker.continueWork()
+    }
+    
+    func didFinishWork() {
+        print("Строитель звонил, сказал что закончил работу")
+    }
+}
+
+class Worker {
+    weak var delegate: WorkerDelegate?
+    
+    func preparingToWork() {
+        print("Строитель делает подготовительные работы")
+        
+        self.timeToPaintWalls()
+    }
+    
+    func timeToPaintWalls() {
+        print("Пришло время красить стены")
+        delegate?.didChooseColor()
+    }
+    
+    func continueWork() {
+        print("Строитель продолжает работу")
+        
+        self.workIsDone()
+    }
+    
+    func workIsDone() {
+        print("Работа закончена")
+        delegate?.didFinishWork()
+    }
+    
+}
+
+let meAgain = MeAgain()
+meAgain.hireWorker()
 
 //: [Назад: Протоколы](@previous)  |  Страница 12]  [Вперед:  Универсальные шаблоны](@next)
