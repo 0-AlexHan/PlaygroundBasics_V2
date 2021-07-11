@@ -74,7 +74,7 @@ if let vatican = country["VA"] {
 
 // Добавь код сюда:
 
-var myPeople: [[String : String]] = [["firstName" : "Calvin",     "lastName" : "Newton"],
+var myPeople: [[String : String?]] = [["firstName" : "Calvin",     "lastName" : "Newton"],
                                      ["firstName" : "Garry",      "lastName" : "Mckenzie"],
                                      ["firstName" : "Leah",       "lastName" : "Rivera"],
                                      ["firstName" : "Sonja",      "lastName" : "Moreno"],
@@ -88,11 +88,14 @@ var myPeople: [[String : String]] = [["firstName" : "Calvin",     "lastName" : "
  */
 // Добавь код сюда:
 var arrayOfFirstNames = [String]()
-myPeople.forEach { (firstNames) in
-    guard let firstName = firstNames["firstName"] else {
-        return
+for each in myPeople {
+    let itemByKey = "firstName"
+    guard let item = each[itemByKey], let firstName = item else {
+        arrayOfFirstNames.append("There is no value")
+        continue
     }
     arrayOfFirstNames.append(firstName)
+    
 }
 print(arrayOfFirstNames)
 
@@ -105,7 +108,7 @@ print(arrayOfFirstNames)
 var people: [[String:Any]] = [
     [
         "firstName": "Calvin",
-        "lastName": "Newton",
+        "lastName": "Mckenzie",
         "score": 13
     ],
     [
@@ -153,18 +156,47 @@ people.sort { (key, value) -> Bool in
 
 print("------>>>")
 
+let sortBy = "score"
+var checkedPeople = [[String : Any]]()
 
-let sortedPeople = people.sorted { ( ($0["score"] as! Int) > ($1["score"] as! Int) ) }
-print(people)
+//for eachMayContainsNil in people {
+//    var dict = [String : Any]()
+//    for (key, value) in eachMayContainsNil {
+//
+//        guard let checked = value else {
+//            if key == sortBy {
+//                dict[key] = 0
+//            } else {
+//                dict[key] = "There is no data"
+//            }
+//           continue
+//        }
+//
+//        dict[key] = checked
+//    }
+//    checkedPeople.append(dict)
+//}
+
+//print(checkedPeople)
+
+print(checkedPeople)
+
+let sortedPeople = people.sorted { (one, another) in
+    if let current = one[sortBy] as? Int,  let next = another[sortBy] as? Int {
+                    
+        return current > next
+    }
+    return false
+}
 
 for (place, person) in sortedPeople.enumerated() {
-    
+
     guard let firstName = person["firstName"],
           let lastName = person["lastName"],
           let score = person["score"] else {
         continue
     }
-    
+
     print("\(place + 1). \(firstName) \(lastName) - \(score)")
 }
 
