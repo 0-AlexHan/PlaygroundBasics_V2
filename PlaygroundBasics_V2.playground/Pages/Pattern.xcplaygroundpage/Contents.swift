@@ -114,94 +114,55 @@ enum FuelType {
     case notConsume, gasoline, electric
 }
 
-protocol Bicycle {
+protocol Vihecle {
     var name: String { get }
     var fuel: FuelType { get }
     var peopleCapacity: Int { get }
+    var isUsed: Bool { get }
     
-    func didInUse() -> Bool
     
 }
 
-protocol Car {
-    var name: String { get }
-    var fuel: FuelType { get }
-    var peopleCapacity: Int { get }
-    
-    func didInUse() -> Bool
-}
-
-protocol ElectricScooter {
-    var name: String { get }
-    var fuel: FuelType { get }
-    var peopleCapacity: Int { get }
-    
-    func didInUse() -> Bool
-}
-
-protocol Scooter {
-    var name: String { get }
-    var fuel: FuelType { get }
-    var peopleCapacity: Int { get }
-    
-    func didInUse() -> Bool
-}
-
-protocol Motocycle {
-    var name: String { get }
-    var fuel: FuelType { get }
-    var peopleCapacity: Int { get }
-    
-    func didInUse() -> Bool
-}
 
 protocol AbstcractFactory {
-    func didCreateBicycle() -> Bicycle
-    func didCreateCar() -> Car
-    func didCreateElectricScooter() -> ElectricScooter
-    func didCreateScooter() -> Scooter
-    func didCreateMotocycle() -> Motocycle
+    func didCreateBicycle() -> Vihecle
+    func didCreateCar() -> Vihecle
+    func didCreateElectricScooter() -> Vihecle
+    func didCreateScooter() -> Vihecle
+    func didCreateMotocycle() -> Vihecle
 }
 
-class SomeBicycle {
-    let used: Bool
-    
-    init(isUsed: Bool) {
-        self.used = isUsed
-    }
+class NewBicycle {
+  
 }
 
-extension SomeBicycle : Bicycle {
-     
+extension NewBicycle : Vihecle {
+
     var name: String {
         return "Велосипед"
     }
-    
+
     var fuel: FuelType {
         return .notConsume
     }
-    
+
     var peopleCapacity: Int {
         return 1
     }
-    
-    func didInUse() -> Bool {
-        return used
+
+    var isUsed: Bool {
+        return false
     }
 }
 
-class SomeCar {
-    let used: Bool
-    
-    init(isUsed: Bool) {
-        self.used = isUsed
-    }
+class NewCar {
+ 
 }
 
-extension SomeCar : Car {
+extension NewCar : Vihecle {
 
     var name: String {
-        return "АВТОМОБИЛЬ"
+        return "Автомобиль"
     }
 
     var fuel: FuelType {
@@ -211,23 +172,20 @@ extension SomeCar : Car {
     var peopleCapacity: Int {
         return 4
     }
-    
-    func didInUse() -> Bool {
-        return used
+
+    var isUsed: Bool {
+        return false
     }
 }
 
-class SomeElectricScooter {
-    let used: Bool
-    
-    init(isUsed: Bool) {
-        self.used = isUsed
-    }
+class NewElectricScooter {
+ 
 }
 
-extension SomeElectricScooter : ElectricScooter {
+extension NewElectricScooter : Vihecle {
+
     var name: String {
-        return "Электросамокат"
+        return "Электроскутер"
     }
 
     var fuel: FuelType {
@@ -237,22 +195,18 @@ extension SomeElectricScooter : ElectricScooter {
     var peopleCapacity: Int {
         return 1
     }
-    
-    func didInUse() -> Bool {
-        return used
+
+    var isUsed: Bool {
+        return false
     }
 }
 
-class SomeScooter {
-    let used: Bool
-    
-    init(isUsed: Bool) {
-        self.used = isUsed
-    }
+class NewScooter {
+  
 }
 
-extension SomeScooter : Scooter {
-    
+extension NewScooter : Vihecle {
+
     var name: String {
         return "Скутер"
     }
@@ -264,23 +218,20 @@ extension SomeScooter : Scooter {
     var peopleCapacity: Int {
         return 2
     }
-    
-    func didInUse() -> Bool {
-        return used
+
+    var isUsed: Bool {
+        return false
     }
 }
 
-class SomeMotocycle {
-    let used: Bool
-    
-    init(isUsed: Bool) {
-        self.used = isUsed
-    }
+class NewMotorcycle {
+   
 }
 
-extension SomeMotocycle : Motocycle {
+extension NewMotorcycle : Vihecle {
+
     var name: String {
-        return "Мотоссыкл"
+        return "Автомобиль"
     }
 
     var fuel: FuelType {
@@ -288,78 +239,194 @@ extension SomeMotocycle : Motocycle {
     }
 
     var peopleCapacity: Int {
-         return 2
+        return 2
     }
-    
-    func didInUse() -> Bool {
-        return used
+
+    var isUsed: Bool {
+        return false
     }
 }
+
+
+class UsedBicycle {
+  
+}
+
+extension UsedBicycle : Vihecle {
+
+    var name: String {
+        return "Велосипед"
+    }
+
+    var fuel: FuelType {
+        return .notConsume
+    }
+
+    var peopleCapacity: Int {
+        return 1
+    }
+
+    var isUsed: Bool {
+        return true
+    }
+}
+
+class UsedCar {
+
+}
+
+extension UsedCar : Vihecle {
+
+    var name: String {
+        return "Автомобиль"
+    }
+
+    var fuel: FuelType {
+        return .gasoline
+    }
+
+    var peopleCapacity: Int {
+        return 4
+    }
+
+    var isUsed: Bool {
+        return true
+    }
+}
+
+class UsedElectricScooter {
+  
+}
+
+extension UsedElectricScooter : Vihecle {
+
+    var name: String {
+        return "Электроскутер"
+    }
+
+    var fuel: FuelType {
+        return .electric
+    }
+
+    var peopleCapacity: Int {
+        return 1
+    }
+
+    var isUsed: Bool {
+        return true
+    }
+}
+
+class UsedScooter {
+  
+}
+
+extension UsedScooter : Vihecle {
+
+    var name: String {
+        return "Скутер"
+    }
+
+    var fuel: FuelType {
+        return .gasoline
+    }
+
+    var peopleCapacity: Int {
+        return 2
+    }
+
+    var isUsed: Bool {
+        return true
+    }
+}
+
+class UsedMotorcycle {
+    
+}
+
+extension UsedMotorcycle : Vihecle {
+
+    var name: String {
+        return "Автомобиль"
+    }
+
+    var fuel: FuelType {
+        return .gasoline
+    }
+
+    var peopleCapacity: Int {
+        return 2
+    }
+
+    var isUsed: Bool {
+        return true
+    }
+}
+
 
 class UsedVehiclesFactory : AbstcractFactory {
-    
+
     static let singleFactory = UsedVehiclesFactory()
-    
+
     private init() { }
-    
-    func didCreateBicycle() -> Bicycle {
-        return SomeBicycle(isUsed: true)
+
+    func didCreateBicycle() -> Vihecle {
+        return UsedBicycle()
     }
 
-    func didCreateCar() -> Car {
-        return SomeCar(isUsed: true)
+    func didCreateCar() -> Vihecle {
+        return UsedCar()
     }
 
-    func didCreateElectricScooter() -> ElectricScooter {
-        return SomeElectricScooter(isUsed: true)
+    func didCreateElectricScooter() -> Vihecle {
+        return UsedElectricScooter()
     }
 
-    func didCreateScooter() -> Scooter {
-        return SomeScooter(isUsed: true)
+    func didCreateScooter() -> Vihecle {
+        return UsedScooter()
     }
 
-    func didCreateMotocycle() -> Motocycle {
-        return SomeMotocycle(isUsed: true)
+    func didCreateMotocycle() -> Vihecle {
+        return UsedMotorcycle()
     }
-    
-    
 }
 
-class NewVehiclesFactory {
+class NewVehiclesFactory : AbstcractFactory {
+
     static let singleFactory = NewVehiclesFactory()
-    
+
     private init() { }
-    
-    func didCreateBicycle() -> Bicycle {
-        return SomeBicycle(isUsed: false)
+
+    func didCreateBicycle() -> Vihecle {
+        return NewBicycle()
     }
 
-    func didCreateCar() -> Car {
-        return SomeCar(isUsed: false)
+    func didCreateCar() -> Vihecle {
+        return NewCar()
     }
 
-    func didCreateElectricScooter() -> ElectricScooter {
-        return SomeElectricScooter(isUsed: false)
+    func didCreateElectricScooter() -> Vihecle {
+        return NewElectricScooter()
     }
 
-    func didCreateScooter() -> Scooter {
-        return SomeScooter(isUsed: false)
+    func didCreateScooter() -> Vihecle {
+        return NewScooter()
     }
 
-    func didCreateMotocycle() -> Motocycle {
-        return SomeMotocycle(isUsed: false)
+    func didCreateMotocycle() -> Vihecle {
+        return NewMotorcycle()
     }
 }
 
 let someNewVehicle = NewVehiclesFactory.singleFactory.didCreateBicycle()
-if someNewVehicle.didInUse() { print("Новый") } else { print("Потасканный") }
+if someNewVehicle.isUsed { print("Потасканный") }else { print("Новый") }
 print(someNewVehicle.name)
 print(someNewVehicle.fuel)
 print(someNewVehicle.peopleCapacity, "чел.")
 
 let someUsedVehicle = UsedVehiclesFactory.singleFactory.didCreateCar()
 
-if someUsedVehicle.didInUse() { print("Новый") } else { print("Потасканный") }
+if someUsedVehicle.isUsed { print("Потасканный") }else { print("Новый") }
 print(someUsedVehicle.name)
 print(someUsedVehicle.fuel)
 print(someUsedVehicle.peopleCapacity, "чел.")
@@ -401,6 +468,9 @@ print(someUsedVehicle.peopleCapacity, "чел.")
 */
 
 // Добавь код сюда:
+
+
+
 
 class Responder {
     private var trash: String
