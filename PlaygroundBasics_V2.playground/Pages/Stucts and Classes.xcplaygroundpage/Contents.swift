@@ -181,16 +181,10 @@ class Point3D: Point2D {
 
     init(x: Double, y: Double, z: Double) {
         super.init(x: x, y: y)
-        
-        self.x = x
-        self.y = y
-        self.z = z
     }
     
     override func reset() {
-        x = 0
-        y = 0
-        z = 0
+        super.reset()
     }
 }
 /*:
@@ -278,12 +272,12 @@ struct CountXAndY {
         return x + y
   }()
     
-    func getSum() {
+    func printSum() {
         print(sum)
     }
 }
 
 let countSum = CountXAndY()
-countSum.getSum()
+countSum.printSum()
 
 //: [Назад: Коллекции. Словари](@previous)  |  Страница 10  |  [Вперед: Протоколы](@next)
