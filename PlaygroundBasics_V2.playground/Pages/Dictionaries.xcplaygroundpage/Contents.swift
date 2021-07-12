@@ -24,21 +24,34 @@ import Foundation
 
 // Добавь код сюда:
 
+var country: [String : String] = ["VA" : "Vatican", "UA" : "Ukraine", "IT" : "Italy"]
 /*:
  - Выведи в консоль все ключи из словаря.
  */
 // Добавь код сюда:
+
+country.forEach { (key, value) in
+    print(key)
+}
+
 
 /*:
  - Выведи в консоль все значения из словаря.
  */
 // Добавь код сюда:
 
+country.forEach { (key, value) in
+    print(value)
+}
 /*:
  - Выведи в консоль название самой маленькой страны.
  - Note: 👆 _Получи из словаря значение по ключу VA_
  */
 // Добавь код сюда:
+if let vatican = country["VA"] {
+    print(vatican)
+}
+
 
 
 /*:
@@ -60,6 +73,12 @@ import Foundation
  */
 
 // Добавь код сюда:
+
+var myPeople: [[String : String?]] = [["firstName" : "Calvin",     "lastName" : "Newton"],
+                                     ["firstName" : "Garry",      "lastName" : "Mckenzie"],
+                                     ["firstName" : "Leah",       "lastName" : "Rivera"],
+                                     ["firstName" : "Sonja",      "lastName" : "Moreno"],
+                                     ["firstName" : "Noel",       "lastName" : "Bowen"]]
 /*:
 - Создай массив строк _firstNames_, состоящий из значений по ключу _“firstName”_, для каждого из словаря.
  - Выведи в консоль полученный массив.
@@ -68,6 +87,17 @@ import Foundation
  firstNames = ["Calvin","Garry","Leah","Sonja","Noel"]
  */
 // Добавь код сюда:
+var arrayOfFirstNames = [String]()
+for each in myPeople {
+    let itemByKey = "firstName"
+    guard let item = each[itemByKey], let firstName = item else {
+        arrayOfFirstNames.append("There is no value")
+        continue
+    }
+    arrayOfFirstNames.append(firstName)
+    
+}
+print(arrayOfFirstNames)
 
 /*:
 ---
@@ -78,7 +108,7 @@ import Foundation
 var people: [[String:Any]] = [
     [
         "firstName": "Calvin",
-        "lastName": "Newton",
+        "lastName": "Mckenzie",
         "score": 13
     ],
     [
@@ -117,6 +147,65 @@ var people: [[String:Any]] = [
  5. Sonja Moreno - 3
 */
 // Добавь код сюда:
+
+
+people.sort { (key, value) -> Bool in
+    
+    return true
+}
+
+print("------>>>")
+
+let sortBy = "score"
+var checkedPeople = [[String : Any]]()
+
+//for eachMayContainsNil in people {
+//    var dict = [String : Any]()
+//    for (key, value) in eachMayContainsNil {
+//
+//        guard let checked = value else {
+//            if key == sortBy {
+//                dict[key] = 0
+//            } else {
+//                dict[key] = "There is no data"
+//            }
+//           continue
+//        }
+//
+//        dict[key] = checked
+//    }
+//    checkedPeople.append(dict)
+//}
+
+//print(checkedPeople)
+
+print(checkedPeople)
+
+let sortedPeople = people.sorted { (one, another) in
+    if let current = one[sortBy] as? Int,  let next = another[sortBy] as? Int {
+                    
+        return current > next
+    }
+    return false
+}
+
+for (place, person) in sortedPeople.enumerated() {
+
+    guard let firstName = person["firstName"],
+          let lastName = person["lastName"],
+          let score = person["score"] else {
+        continue
+    }
+
+    print("\(place + 1). \(firstName) \(lastName) - \(score)")
+}
+
+
+
+
+
+
+
 
 
 //: [Назад: Кортежи, перечисления и псевдонимы типов](@previous)  |  Страница 9  |  [Вперед: Структуры и классы](@next)
