@@ -36,6 +36,71 @@ import Foundation
 
 // Добавь код сюда:
 
+protocol PizzZzaProducts : AnyObject {
+    var pizzaName: String { get }
+    
+    func didStartCooking()
+    
+}
+
+class CheesePizza {
+    
+}
+
+extension CheesePizza : PizzZzaProducts {
+    var pizzaName: String {
+        return "Пицца с сыром"
+    }
+    
+    func didStartCooking() {
+        print("Начали готовить пиццу с сыром")
+    }
+}
+
+class PepperoniPizza {
+    
+}
+
+extension PepperoniPizza : PizzZzaProducts {
+    var pizzaName: String {
+        return "Пицца Пепперони"
+    }
+    
+    func didStartCooking() {
+        print("Начали готовить пиццу Пепперони")
+    }
+}
+
+enum Menu {
+    case pepperoni, cheesePizza
+}
+
+class PizzZzaFactory {
+    static let singleFactory = PizzZzaFactory()
+    
+    private init() { }
+    
+    
+    func createSomePizza(withName name: Menu) -> PizzZzaProducts {
+        switch name {
+            case .pepperoni:
+                return PepperoniPizza()
+            case .cheesePizza:
+                return CheesePizza()
+        }
+    }
+}
+func customersOrder(pizza: Menu) -> PizzZzaProducts {
+    return PizzZzaFactory.singleFactory.createSomePizza(withName: pizza)
+}
+ 
+let pepperoni = customersOrder(pizza: .pepperoni)
+let cheesePizza = customersOrder(pizza: .cheesePizza)
+
+
+
+
+
 /*:
 ---
 #### Задание 2
@@ -44,6 +109,327 @@ import Foundation
 */
 
 // Добавь код сюда:
+
+enum FuelType {
+    case notConsume, gasoline, electric
+}
+
+protocol Vihecle {
+    var name: String { get }
+    var fuel: FuelType { get }
+    var peopleCapacity: Int { get }
+    var isUsed: Bool { get }
+    
+    
+}
+
+
+protocol AbstcractFactory {
+    func didCreateBicycle() -> Vihecle
+    func didCreateCar() -> Vihecle
+    func didCreateElectricScooter() -> Vihecle
+    func didCreateScooter() -> Vihecle
+    func didCreateMotocycle() -> Vihecle
+}
+
+class NewBicycle {
+  
+}
+
+extension NewBicycle : Vihecle {
+
+    var name: String {
+        return "Велосипед"
+    }
+
+    var fuel: FuelType {
+        return .notConsume
+    }
+
+    var peopleCapacity: Int {
+        return 1
+    }
+
+    var isUsed: Bool {
+        return false
+    }
+}
+
+class NewCar {
+ 
+}
+
+extension NewCar : Vihecle {
+
+    var name: String {
+        return "Автомобиль"
+    }
+
+    var fuel: FuelType {
+        return .gasoline
+    }
+
+    var peopleCapacity: Int {
+        return 4
+    }
+
+    var isUsed: Bool {
+        return false
+    }
+}
+
+class NewElectricScooter {
+ 
+}
+
+extension NewElectricScooter : Vihecle {
+
+    var name: String {
+        return "Электроскутер"
+    }
+
+    var fuel: FuelType {
+        return .electric
+    }
+
+    var peopleCapacity: Int {
+        return 1
+    }
+
+    var isUsed: Bool {
+        return false
+    }
+}
+
+class NewScooter {
+  
+}
+
+extension NewScooter : Vihecle {
+
+    var name: String {
+        return "Скутер"
+    }
+
+    var fuel: FuelType {
+        return .gasoline
+    }
+
+    var peopleCapacity: Int {
+        return 2
+    }
+
+    var isUsed: Bool {
+        return false
+    }
+}
+
+class NewMotorcycle {
+   
+}
+
+extension NewMotorcycle : Vihecle {
+
+    var name: String {
+        return "Автомобиль"
+    }
+
+    var fuel: FuelType {
+        return .gasoline
+    }
+
+    var peopleCapacity: Int {
+        return 2
+    }
+
+    var isUsed: Bool {
+        return false
+    }
+}
+
+
+class UsedBicycle {
+  
+}
+
+extension UsedBicycle : Vihecle {
+
+    var name: String {
+        return "Велосипед"
+    }
+
+    var fuel: FuelType {
+        return .notConsume
+    }
+
+    var peopleCapacity: Int {
+        return 1
+    }
+
+    var isUsed: Bool {
+        return true
+    }
+}
+
+class UsedCar {
+
+}
+
+extension UsedCar : Vihecle {
+
+    var name: String {
+        return "Автомобиль"
+    }
+
+    var fuel: FuelType {
+        return .gasoline
+    }
+
+    var peopleCapacity: Int {
+        return 4
+    }
+
+    var isUsed: Bool {
+        return true
+    }
+}
+
+class UsedElectricScooter {
+  
+}
+
+extension UsedElectricScooter : Vihecle {
+
+    var name: String {
+        return "Электроскутер"
+    }
+
+    var fuel: FuelType {
+        return .electric
+    }
+
+    var peopleCapacity: Int {
+        return 1
+    }
+
+    var isUsed: Bool {
+        return true
+    }
+}
+
+class UsedScooter {
+  
+}
+
+extension UsedScooter : Vihecle {
+
+    var name: String {
+        return "Скутер"
+    }
+
+    var fuel: FuelType {
+        return .gasoline
+    }
+
+    var peopleCapacity: Int {
+        return 2
+    }
+
+    var isUsed: Bool {
+        return true
+    }
+}
+
+class UsedMotorcycle {
+    
+}
+
+extension UsedMotorcycle : Vihecle {
+
+    var name: String {
+        return "Автомобиль"
+    }
+
+    var fuel: FuelType {
+        return .gasoline
+    }
+
+    var peopleCapacity: Int {
+        return 2
+    }
+
+    var isUsed: Bool {
+        return true
+    }
+}
+
+
+class UsedVehiclesFactory : AbstcractFactory {
+
+    static let singleFactory = UsedVehiclesFactory()
+
+    private init() { }
+
+    func didCreateBicycle() -> Vihecle {
+        return UsedBicycle()
+    }
+
+    func didCreateCar() -> Vihecle {
+        return UsedCar()
+    }
+
+    func didCreateElectricScooter() -> Vihecle {
+        return UsedElectricScooter()
+    }
+
+    func didCreateScooter() -> Vihecle {
+        return UsedScooter()
+    }
+
+    func didCreateMotocycle() -> Vihecle {
+        return UsedMotorcycle()
+    }
+}
+
+class NewVehiclesFactory : AbstcractFactory {
+
+    static let singleFactory = NewVehiclesFactory()
+
+    private init() { }
+
+    func didCreateBicycle() -> Vihecle {
+        return NewBicycle()
+    }
+
+    func didCreateCar() -> Vihecle {
+        return NewCar()
+    }
+
+    func didCreateElectricScooter() -> Vihecle {
+        return NewElectricScooter()
+    }
+
+    func didCreateScooter() -> Vihecle {
+        return NewScooter()
+    }
+
+    func didCreateMotocycle() -> Vihecle {
+        return NewMotorcycle()
+    }
+}
+
+let someNewVehicle = NewVehiclesFactory.singleFactory.didCreateBicycle()
+if someNewVehicle.isUsed { print("Потасканный") }else { print("Новый") }
+print(someNewVehicle.name)
+print(someNewVehicle.fuel)
+print(someNewVehicle.peopleCapacity, "чел.")
+
+let someUsedVehicle = UsedVehiclesFactory.singleFactory.didCreateCar()
+
+if someUsedVehicle.isUsed { print("Потасканный") }else { print("Новый") }
+print(someUsedVehicle.name)
+print(someUsedVehicle.fuel)
+print(someUsedVehicle.peopleCapacity, "чел.")
 
 
 /*:
@@ -82,6 +468,90 @@ import Foundation
 */
 
 // Добавь код сюда:
+
+
+
+
+class Responder {
+    private var trash: String
+    private var nextResponder: Responder?
+    
+    init(trash: String) {
+        self.trash = trash
+    }
+    
+    func setNext(responder next: Responder) {
+        self.nextResponder = next
+    }
+    
+    func checking(trash type: String) {
+        if trash == type {
+            print("\(type) trash were recycled")
+        } else if let next = nextResponder {
+            print("Can't handle \(type). Transfering to the next responder ")
+             next.checking(trash: type)
+        } else {
+            print("Adding to warehouse")
+            Warehouse.warehouseInstance.addToWarehouse(trash: type)
+        }
+    }
+}
+
+class TrashRecycle {
+    private var foodWaste: Responder
+    private var electronic: Responder
+    private var papper: Responder
+    private var glass: Responder
+    
+    init(foodWaste: Responder, electronic: Responder,
+         papper: Responder, glass: Responder) {
+        
+        self.foodWaste = foodWaste
+        self.electronic = electronic
+        self.papper = papper
+        self.glass = glass
+    }
+    
+    func recycle(trash: String) {
+        
+        foodWaste.checking(trash: trash)
+    }
+    
+}
+
+class Warehouse {
+    private var garbageCollection = [String]()
+    
+    static let warehouseInstance = Warehouse()
+    
+    private init(){}
+    
+    func addToWarehouse(trash type: String) -> String {
+        
+        garbageCollection.append(type)
+        return "Added to warehouse"
+    }
+    
+    func getGarbage() {
+        print(garbageCollection)
+    }
+}
+let foodWasteResponder = Responder(trash: "Food")
+let electronicResponder = Responder(trash: "Electronics")
+let papperResponder = Responder(trash: "Papper")
+let glassResponder = Responder(trash: "Glass")
+
+foodWasteResponder.setNext(responder: electronicResponder)
+electronicResponder.setNext(responder: papperResponder)
+papperResponder.setNext(responder: glassResponder)
+
+let trashRecycle = TrashRecycle(foodWaste: foodWasteResponder, electronic: electronicResponder, papper: papperResponder, glass: glassResponder)
+
+trashRecycle.recycle(trash: "Glass")
+trashRecycle.recycle(trash: "Papper")
+trashRecycle.recycle(trash: "Plastic")
+
+Warehouse.warehouseInstance.getGarbage()
 
 
 /*:
