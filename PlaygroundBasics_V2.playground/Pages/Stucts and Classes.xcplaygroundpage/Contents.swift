@@ -181,10 +181,12 @@ class Point3D: Point2D {
 
     init(x: Double, y: Double, z: Double) {
         super.init(x: x, y: y)
+        self.z = z
     }
     
     override func reset() {
         super.reset()
+        z = 0
     }
 }
 /*:
@@ -200,6 +202,7 @@ let point3D = Point3D(x: 1, y: 2, z: 3)
  */
 
 // Добавь код сюда:
+print(point3D.x, point3D.y, point3D.z)
 
 point3D.reset()
 
